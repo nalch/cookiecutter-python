@@ -1,0 +1,15 @@
+.idea
+.coverage
+coverage.xml
+{% if cookiecutter.use_tox == 'yes' %}
+.tox
+{% endif %}
+.pytest_cache
+docs/build/
+test_results.xml
+*.pyc
+*.pyo
+dist/*
+*egg-info*
+.vagrant
+.env

@@ -1,0 +1,28 @@
+[pycodestyle]
+show-source=True
+statistics=True
+
+[tox]
+envlist = py27,py36,codestyle
+
+[testenv]
+deps =
+    -rrequirements_test.txt
+commands = {posargs:py.test -n auto --cov-report term-missing --cov-report xml --junitxml test_results.xml --cov={{ cookiecutter.package_name }}}
+# allows overriding the command to run:
+#   tox -- py.test -k test_something
+#   tox -e py34 -- python ...
+
+[testenv:codestyle]
+commands =
+    flake8 src/{{ cookiecutter.package_name }} tests
+    pydocstyle src/{{ cookiecutter.package_name }}
+    isort --check-only --diff --recursive src/{{ cookiecutter.package_name }} tests
+    mypy
+
+    pydocstyle src/
+	isort --recursive src/ tests
+	unify -i -r src/ tests
+	flake8 src/ tests
+	mypy --ignore-missing-imports src/
+	pytype src/
