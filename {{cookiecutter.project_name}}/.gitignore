@@ -5,6 +5,8 @@ coverage.xml
 .tox
 {% endif %}
 .pytest_cache
+.mypy_cache
+.pytype
 docs/build/
 test_results.xml
 *.pyc

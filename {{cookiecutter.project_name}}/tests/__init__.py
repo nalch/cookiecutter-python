@@ -1,1 +1,1 @@
-"""tests module for logging_endpoint package."""
+"""tests module for {{ cookiecutter.package_name }} package."""

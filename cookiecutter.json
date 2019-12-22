@@ -4,5 +4,6 @@
   "author": "nalch",
   "package_name": "{{cookiecutter.project_name.replace('-', '_')}}",
   "package_version": "1.0.0",
+  "python_version": "3.6",
   "use_tox": "no"
 }

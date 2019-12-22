@@ -1,11 +1,14 @@
 all: test lint docs
 
-test: dev_reqs build plain-test
+test: dev_reqs build plain-test plain-lint
 
-dev_reqs:
+env:
+	pipenv install
+
+dev_reqs: env
 	pipenv sync --dev
 
-build_reqs:
+build_reqs: env
 	pipenv sync
 
 plain-test:
