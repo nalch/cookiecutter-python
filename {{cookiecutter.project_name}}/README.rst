@@ -30,3 +30,10 @@ are listed below.
 * `make lint` - Get a codestyle report about your code
 * `make plain-lint` - Get a codestyle report without rebuilding the project
 * `make` - Equivalent to `make test lint docs sdist`
+
+Versioning
+**********
+
+Versioning is done with the utility `bump2version` and started via the Makefile::
+
+    make version bump=(major|minor|patch)

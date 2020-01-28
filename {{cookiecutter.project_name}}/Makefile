@@ -31,6 +31,9 @@ docs: dev_reqs
 shell:
 	poetry run ipython
 
+version: dev_reqs
+	poetry run bumpversion $(bump)
+
 clean:
 	# - @rm -rf docs/build
 	- @rm -rf src/*.egg-info
