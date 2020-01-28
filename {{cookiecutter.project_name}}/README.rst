@@ -31,6 +31,16 @@ are listed below.
 * `make plain-lint` - Get a codestyle report without rebuilding the project
 * `make` - Equivalent to `make test lint docs sdist`
 
+Commits
+*******
+
+Commits should group the type between features and fixes and depict this in the commit message::
+
+    git commit -m "feat: fancy feature"
+    git commit -m "fix: fancier bugfix"
+
+Those are used to generate the changelog when creating a new version.
+
 Versioning
 **********
 

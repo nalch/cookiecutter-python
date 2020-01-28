@@ -33,6 +33,8 @@ shell:
 
 version: dev_reqs
 	poetry run bumpversion $(bump)
+	poetry run gitchangelog > docs/source/changelog.rst
+	git add docs/source/changelog.rst && git commit --amend
 
 clean:
 	# - @rm -rf docs/build
