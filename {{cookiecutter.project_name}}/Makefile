@@ -1,40 +1,35 @@
 all: test lint docs
 
-test: dev_reqs build plain-test plain-lint
+test: dev_reqs plain-test plain-lint
 
-env:
-	pipenv install
+dev_reqs:
+	poetry install
 
-dev_reqs: env
-	pipenv sync --dev
-
-build_reqs: env
-	pipenv sync
+build_reqs:
+	poetry install --no-dev
 
 plain-test:
-	pipenv run pytest -n auto --cov-report term-missing --cov-report xml --junitxml test_results.xml --cov={{cookiecutter.package_name}}
+	poetry run pytest -n auto --cov-report term-missing --cov-report xml --junitxml test_results.xml --cov={{cookiecutter.package_name}}
 
 plain-lint:
-	pipenv run pydocstyle src/
-	pipenv run isort --recursive src/ tests
-	pipenv run unify -i -r src/ tests
-	pipenv run flake8 src/ tests
-	pipenv run mypy --ignore-missing-imports src/
-	pipenv run pytype src/
-
-build: build_reqs
-	pipenv run pip install --editable .
+	poetry run black --check src tests
+	poetry run pydocstyle src/
+	poetry run isort --recursive src/ tests
+	poetry run unify -i -r src/ tests
+	poetry run flake8 src/ tests
+	poetry run mypy --ignore-missing-imports src/
+	poetry run pytype src/
 
 sdist: build_reqs
-	pipenv run python setup.py sdist
+	poetry build
 
-lint: dev_reqs build plain-lint
+lint: dev_reqs plain-lint
 
 docs: dev_reqs
-	pipenv run $(MAKE) -C docs html
+	poetry run $(MAKE) -C docs html
 
 shell:
-	pipenv run ipython
+	poetry run ipython
 
 clean:
 	# - @rm -rf docs/build
@@ -46,4 +41,3 @@ clean:
 	- @rm -rf .pytest_cache
 	- @rm -rf .pytype
 	- @find ./src ./docs -name '*.pyc' | xargs -r rm
-	- pipenv --rm
